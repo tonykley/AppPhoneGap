@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Adicionar Usuário PhoneGap</title>
+        
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"></script>
+        
+        <script>
+
+	        document.addEventListener("deviceready", findUsers, false);
+	        
+	        function onError(userError) {
+		        alert("Error = " + userError.code);
+		    };
+         	
+         	function onSuccess(myUser) {
+		        var mail = ""; 
+		        var key = "";
+		        for (var i=0; i<myUser.length; i++) {
+		        	mail = mail + myUser[i].mailUser;	
+		            document.getElementById("retornoMail").innerHTML = "E-mail: " + mail;
+		            key = key + myUser[i].keyUser;	
+		            document.getElementById("retornoKey").innerHTML = "Senha: " + key;
+		        }
+		    }
+		    
+        	function findUsers()
+			{	
+		        var options = new ContactFindOptions();
+
+				options.multiple=true;     
+				filter = ["mailUser","keyUser"];  
+		      	navigator.contacts.find(filter, onSuccess, onError, options);
+			}
+
+		</script>
+
+    </head>
+    <body>
+    	<div id="all">
+	    	<div id="title">
+	    		<h3>Usuarios (PhoneGap)</h2>
+	        </div>
+	        <div id="body">
+	        	<br>
+	        	<br>
+	        	<a href="addUser.html">Novo Usuario</a>
+	        	<br>
+				<p id="retornoMail"></p>
+				<p id="retornoKey"></p>
+	        </div>
+        </div>
+	</body>
+</html>

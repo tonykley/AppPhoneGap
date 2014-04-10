@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Adicionar Usuário PhoneGap</title>
+        
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"></script>
+    	<script>
+    	    		
+    		function onSuccess(user) {
+    			alert("Usuario Salvo");
+			};
+			
+			function onError(userError) {
+			    alert("Error = " + userError.code);
+			};
+    		
+    		function salvaUsuario()
+			{
+				var myUser = navigator.contacts.create();
+		        myUser.mailUser = document.getElementById('mailUser').value;
+				myUser.keyUser = document.getElementById('keyUser').value;
+		        myUser.save(onSuccess(myUser),onError);
+			}
+			
+			function limparCampos() 
+			{
+				document.getElementById('mailUser').value="";
+				document.getElementById('keyUser').value="";
+			}
+					
+    	</script>
+    </head>
+    <body>
+    	<div id="all">
+	    	<div id="title">
+	    		<h3>Adicionar Usuário</h3>
+	        </div>
+        	<div id="body">
+	        	<br>
+	        	<br>
+				<a href="index.html">Ver Usuarios</a>
+				<form>
+				E-mail: 
+				<input type="text" name="mailUser" id="mailUser">
+				<br>
+				Senha: 
+				<input type="password" name="keyUser" id="keyUser">
+				<br>
+				<input type="submit" value="Cancelar" onclick="limparCampos()">
+				<input type="submit" value="Salvar" onclick="salvaUsuario()">
+				</form>
+				<br>
+				<p id="retorno"></p>
+	        </div>
+        </div>
+	</body>
+</html>
